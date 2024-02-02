@@ -1,0 +1,42 @@
+﻿@page
+@model FormModel
+@{
+    ViewData["Title"] = "Form";
+}
+<h1>@ViewData["Title"]</h1>
+<h3 class="alert-info">@Model.Error</h3>
+<form method="POST" asp-page="Form" class="alert alert-info">
+    <div class="form-group mb-2" >
+        <label asp-for="@Model.UserInfo.Name"></label>
+        <input asp-for="@Model.UserInfo.Name" class="form-control" />
+        <span asp-validation-for="@Model.UserInfo.Name"></span>
+    </div>
+    <div class="form-group mb-2">
+        <label asp-for="@Model.UserInfo.Email"></label>
+        <input asp-for="@Model.UserInfo.Email" class="form-control" />
+        <span asp-validation-for="@Model.UserInfo.Email"></span>
+    </div>
+    <div class="form-group mb-2">
+        <label asp-for="@Model.UserInfo.Password"></label>
+        <input asp-for="@Model.UserInfo.Password" class="form-control"/>
+        <span asp-validation-for="@Model.UserInfo.Password"></span>
+    </div>
+    <div class="form-group mb-2">
+        <label asp-for="@Model.UserInfo.ConfirmPassword"></label>
+        <input asp-for="@Model.UserInfo.ConfirmPassword" class="form-control"/>
+        <span asp-validation-for="@Model.UserInfo.ConfirmPassword"></span>
+    </div>
+    
+    <button class="btn btn-outline-success" type="submit">Submit</button>
+</form>
+
+<h2>Display User List</h2>
+@if(@Model.UserInfo != null)
+{
+    <div class="alert alert-success">
+        <p>Name: @Model.UserInfo.Name</p>
+        <p>Email: @Model.UserInfo.Email</p>
+        <p>Password: @Model.UserInfo.Password</p>
+        <p>Confirm Password: @Model.UserInfo.ConfirmPassword</p>
+    </div>
+} 

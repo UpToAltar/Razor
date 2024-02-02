@@ -1,0 +1,82 @@
+@page
+@model Razor.Pages.Blog.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    int number = 0;
+    
+    var pagingModel = new Razor.Helpers.Paging()
+    {
+        currentPage = Model.CurrentPage,
+        countPages = Model.CountPages,
+        generateUrl =  (int? page) => $"/Blog?page={page}"
+    };
+}
+
+<h1>Article List</h1>
+
+<form method="post" class="mb-2 mt-2">
+    Search: <input type="text" value="@Model.SreachString" name="Title"/>
+    <button type="submit" class="btn btn-success">Search</button>
+</form>
+
+<p>
+    <a asp-page="Create" class="btn btn-info">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Number</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article[0].Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article[0].Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article[0].Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article[0].CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Article[0].UpdatedAt)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Article != null)
+    {
+        @foreach (var item in Model.Article) {
+            number++;
+            <tr>
+                <td>@number.ToString()</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.Raw(item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a  asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+
+<partial name="Shared/_Paging" model="@pagingModel"/>

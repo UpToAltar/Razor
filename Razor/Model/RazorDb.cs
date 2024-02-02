@@ -1,0 +1,31 @@
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace Razor.Model;
+
+public class RazorDb : IdentityDbContext<AppUser>
+{
+    public DbSet<Article> Articles { set; get; }
+    public RazorDb(DbContextOptions<RazorDb> options) : base(options)
+    {
+        
+    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        // Bỏ tiền tố AspNet của các bảng: mặc định các bảng trong IdentityDbContext có
+        // tên với tiền tố AspNet như: AspNetUserRoles, AspNetUser ...
+        // Đoạn mã sau chạy khi khởi tạo DbContext, tạo database sẽ loại bỏ tiền tố đó
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes ()) {
+            var tableName = entityType.GetTableName ();
+            if (tableName.StartsWith ("AspNet")) {
+                entityType.SetTableName (tableName.Substring (6));
+            }
+        }
+    }
+}
