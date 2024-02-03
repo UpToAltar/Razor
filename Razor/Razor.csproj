@@ -40,4 +40,12 @@
       <Folder Include="Pages\Blog\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Areas\Admin\Pages\Roles\Create.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Pages\Roles\Delete.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Pages\Roles\Details.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Pages\Roles\Edit.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Pages\Roles\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

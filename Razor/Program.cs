@@ -21,8 +21,10 @@ services.AddDbContext<RazorDb>(options =>
 
 // Add Identity with UI
 services.AddDefaultIdentity<AppUser>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<RazorDb>()
     .AddDefaultTokenProviders();
+    
 
 // Truy cập IdentityOptions
 services.Configure<IdentityOptions> (options => {

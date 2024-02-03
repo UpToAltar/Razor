@@ -1,0 +1,43 @@
+@page "/Admin/Roles/Index"
+@model Razor.Pages.Roles.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    int number = 0;
+}
+
+<h1>Roles List</h1>
+<p>
+    <a asp-page="Create" class="btn btn-info text-white">Create New</a>
+</p>
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Number</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Roles[0].Name)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Roles != null)
+    {
+        @foreach (var item in Model.Roles) {
+            number++;
+            <tr>
+                <td>@number.ToString()</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-page="Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a class="btn btn-danger" asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
