@@ -1,0 +1,90 @@
+@page "/Admin/Users/Index"
+@model Razor.Pages.Users.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    int number = 0;
+    
+    var pagingModel = new Razor.Helpers.Paging()
+    {
+        currentPage = Model.CurrentPage,
+        countPages = Model.CountPages,
+        generateUrl =  (int? page) => $"/Admin/Users/Index?page={page}"
+    };
+}
+
+<h1>User List</h1>
+<p>
+    <a asp-page="Create" class="btn btn-info text-white">Create New</a>
+</p>
+
+<h2>Total Users : @Model.totalUsers</h2>
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Number</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users[0].UserName)
+        </th>
+        <th>
+            Roles
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users[0].Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users[0].Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users[0].PhoneNumber)
+        </th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Users != null)
+    {
+        @foreach (var item in Model.Users) {
+            number++;
+            <tr>
+                <td>@number.ToString()</td>
+                <td>
+                    @Html.DisplayFor(model => item.UserName)
+                </td>
+                <td>
+                    @if(item.UserRoles.Count > 0)
+                    {
+                        foreach (var role in item.UserRoles)
+                        {
+                            <span class="badge bg-primary">@role</span>
+                        }
+                    }
+                    else
+                    {
+                        <a class="badge bg-success text-decoration-none" asp-page="SetRole" asp-route-id="@item.Id">+ Add Roles</a>
+                    }
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(model => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.PhoneNumber)
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-page="SetPassword" asp-route-id="@item.Id">Set Password</a> 
+                    <a class="btn btn-info" asp-page="SetRole" asp-route-id="@item.Id">Set Role</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+
+<partial name="_Paging" model="@pagingModel"/>

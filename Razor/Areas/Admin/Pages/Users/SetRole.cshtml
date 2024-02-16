@@ -1,0 +1,27 @@
+﻿@page "/Admin/Users/SetRoles/{id}"
+@model Razor.Pages.Users.SetRole
+@{
+    ViewData["Title"] = "Set Roles";
+    var selectList = new SelectList(Model.AllRoles);
+}
+
+<h3>Set Roles for user : @Model.User.UserName</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="set-password-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <label asp-for="UserRoles" class="mb-2" style="font-weight: 500; padding: 0 0.75rem; font-size: 1.2rem"></label>
+                @Html.ListBoxFor(u => u.UserRoles, selectList, new { @class = "form-control h-100 pt-30" })
+                <span asp-validation-for="UserRoles" class="text-danger"></span>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary mt-2">Set Roles</button>
+            <a asp-page="./Index" class="btn btn-secondary mt-2">Back To List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
