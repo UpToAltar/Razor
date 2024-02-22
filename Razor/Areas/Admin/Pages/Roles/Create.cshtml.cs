@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,6 +12,8 @@ using Razor.Model;
 
 namespace Razor.Pages.Roles
 {
+    [Authorize(Policy = "CRUD-Role")]
+
     public class CreateModel : RolePageModel
     {
         public CreateModel(RoleManager<IdentityRole> roleManager, RazorDb context) : base(roleManager, context)

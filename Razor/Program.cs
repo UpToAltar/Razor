@@ -86,6 +86,59 @@ services.AddScoped<IEmailSender, SendMailService>();
 // Razor
 services.AddRazorPages();
 
+// Add Authorization
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireRole("Admin");
+    });
+    options.AddPolicy("Manager", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireRole("Manager");
+    });
+    options.AddPolicy("User", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+    });
+    
+    options.AddPolicy("CRUD-Blog", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("Blog", "CRUD");
+    });
+    options.AddPolicy("CRUD-Role", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("Role", "CRUD");
+    });
+    
+    options.AddPolicy("Read-Role", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("Role", "CRUD", "Read");
+    });
+    
+    options.AddPolicy("CRUD-User", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("User", "CRUD");
+    });
+    
+    options.AddPolicy("Read-User", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("User", "CRUD", "Read");
+    });
+    options.AddPolicy("SetPass-User", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("User", "CRUD", "Set-Password");
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

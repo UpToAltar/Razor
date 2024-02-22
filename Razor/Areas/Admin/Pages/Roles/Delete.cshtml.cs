@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,6 +11,7 @@ using Razor.Model;
 
 namespace Razor.Pages.Roles
 {
+    [Authorize(Policy = "CRUD-Role")]
     public class DeleteModel : RolePageModel
     {
         public DeleteModel(RoleManager<IdentityRole> roleManager, RazorDb context) : base(roleManager, context)

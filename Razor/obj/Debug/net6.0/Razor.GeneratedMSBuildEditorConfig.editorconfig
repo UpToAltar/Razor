@@ -45,6 +45,14 @@ build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcUm9sZXNcSW5k
 build_metadata.AdditionalFiles.CssScope = 
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/TeamGame/Razor/Razor/Areas/Admin/Pages/Roles/AddClaim.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcUm9sZXNcQWRkQ2xhaW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TeamGame/Razor/Razor/Areas/Admin/Pages/Roles/EditClaim.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcUm9sZXNcRWRpdENsYWltLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/TeamGame/Razor/Razor/Areas/Admin/Pages/Roles/_StatusMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cUGFnZXNcUm9sZXNcX1N0YXR1c01lc3NhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

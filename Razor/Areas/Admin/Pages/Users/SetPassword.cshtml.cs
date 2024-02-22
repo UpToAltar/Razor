@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +13,7 @@ using Razor.Model;
 
 namespace Razor.Pages.Users
 {
+    [Authorize(Policy = "SetPass-User")]
     public class SetPassword : UserPageModel
     {
         public SetPassword(RoleManager<IdentityRole> roleManager, RazorDb context, UserManager<AppUser> userManager) : base(roleManager, context, userManager)
